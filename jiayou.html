@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jiayou - Language Learning App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            overflow-x: hidden;
+            line-height: 1.6;
+            height: 100vh;
+            overflow-y: hidden; /* Cache la barre de scroll native */
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #4a6cf7;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4a6cf7;
+        }
+
+        .cta-button {
+            background-color: #4a6cf7;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: #3a5bd9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(58, 91, 217, 0.2);
+        }
+
+        /* Container principal pour le scroll */
+        .main-container {
+            height: 100vh;
+            overflow-y: auto;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        /* Sections avec scroll snapping */
+        section {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+        }
+
+        /* Slide effect container */
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease-out;
+            pointer-events: none;
+        }
+
+        .slide-container.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+
+        /* Content styles */
+        .content {
+            width: 50%;
+            z-index: 2;
+        }
+
+        .content h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1.5rem;
+            color: #222;
+        }
+
+        .content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #222;
+        }
+
+        .content p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #4a6cf7;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #777;
+        }
+
+        /* Image placeholder */
+        .image-placeholder {
+            width: 45%;
+            height: 400px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin-left: 5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #888;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #aaa;
+        }
+
+        /* Section-specific colors */
+        #introduction {
+            background-color: #f0f5ff;
+        }
+
+        #concept1 {
+            background-color: #f9f9f9;
+        }
+
+        #concept2 {
+            background-color: #f0f8ff;
+        }
+
+        #concept3 {
+            background-color: #f5f0ff;
+        }
+
+        #concept4 {
+            background-color: #fff0f5;
+        }
+
+        /* Scroll down indicator */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #4a6cf7;
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: #ddd;
+            padding: 4rem 5% 2rem;
+            scroll-snap-align: start;
+            min-height: 50vh;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-section p {
+            margin-bottom: 1rem;
+            color: #aaa;
+        }
+
+        .app-badges img {
+            height: 40px;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #aaa;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+
+        .indicator-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #ccc;
+            border-radius: 50%;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .indicator-dot.active {
+            background-color: #4a6cf7;
+            transform: scale(1.3);
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 992px) {
+            .content, .image-placeholder {
+                width: 100%;
+                margin-left: 0;
+            }
+            
+            .content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .content h2 {
+                font-size: 2rem;
+            }
+            
+            .slide-container {
+                flex-direction: column;
+                justify-content: center;
+                padding-top: 100px;
+            }
+            
+            .image-placeholder {
+                height: 300px;
+                margin-top: 3rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .content h1 {
+                font-size: 2rem;
+            }
+            
+            .content h2 {
+                font-size: 1.7rem;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            section {
+                padding: 0 1.5rem;
+            }
+            
+            /* Sur mobile, on réactive le scroll normal */
+            body {
+                overflow-y: auto;
+            }
+            
+            .main-container {
+                overflow-y: auto;
+                scroll-snap-type: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">加油 Jiayou!</a>
+        <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Connect / Register</a>
+    </nav>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator">
+        <div class="indicator-dot active" data-section="introduction"></div>
+        <div class="indicator-dot" data-section="concept1"></div>
+        <div class="indicator-dot" data-section="concept2"></div>
+        <div class="indicator-dot" data-section="concept3"></div>
+        <div class="indicator-dot" data-section="concept4"></div>
+    </div>
+
+    <!-- Container principal pour le scroll -->
+    <div class="main-container" id="main-container">
+        <!-- Sections -->
+        <main>
+            <section id="introduction">
+                <div class="slide-container active">
+                    <div class="content">
+                        <h1>Jiayou - Master Languages Faster</h1>
+                        <p>An innovative app that transforms how you learn and practice languages through interactive challenges, social duels, and personalized tracking.</p>
+                        
+                        <div class="stats">
+                            <div class="stat-item">
+                                <span class="stat-number">500K+</span>
+                                <span class="stat-label">Active Learners</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">50+</span>
+                                <span class="stat-label">Languages</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">95%</span>
+                                <span class="stat-label">Satisfaction Rate</span>
+                            </div>
+                        </div>
+                        
+                        <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Start Learning Now</a>
+                    </div>
+                    <div class="image-placeholder">
+                        <i class="fas fa-globe-americas"></i>
+                        <p>Global language learning community</p>
+                    </div>
+                </div>
+                <div class="scroll-down" onclick="scrollToNextSection()">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </section>
+
+            <section id="concept1">
+                <div class="slide-container">
+                    <div class="content">
+                        <h2>Capture Words Instantly</h2>
+                        <p>Use your camera to capture any text in a foreign language. Jiayou instantly translates and saves new vocabulary to your personal word bank.</p>
+                        <ul style="margin-left: 1.5rem; margin-bottom: 2rem;">
+                            <li>Real-time translation with pronunciation</li>
+                            <li>Save words with context for better retention</li>
+                            <li>Create flashcards from captured content</li>
+                            <li>Organize vocabulary by categories</li>
+                        </ul>
+                        <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Try Capture Feature</a>
+                    </div>
+                    <div class="image-placeholder">
+                        <i class="fas fa-camera"></i>
+                        <p>Capture text feature demonstration</p>
+                    </div>
+                </div>
+                <div class="scroll-down" onclick="scrollToNextSection()">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </section>
+
+            <section id="concept2">
+                <div class="slide-container">
+                    <div class="content">
+                        <h2>Learn & Quiz Your Knowledge</h2>
+                        <p>Interactive lessons and quizzes adapted to your level and learning pace. Our AI identifies your weak spots and focuses on them.</p>
+                        <ul style="margin-left: 1.5rem; margin-bottom: 2rem;">
+                            <li>Personalized daily lessons</li>
+                            <li>Interactive quizzes with instant feedback</li>
+                            <li>Spaced repetition system</li>
+                            <li>Speaking and listening exercises</li>
+                        </ul>
+                        <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Try a Quiz</a>
+                    </div>
+                    <div class="image-placeholder">
+                        <i class="fas fa-brain"></i>
+                        <p>Interactive quiz interface</p>
+                    </div>
+                </div>
+                <div class="scroll-down" onclick="scrollToNextSection()">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </section>
+
+            <section id="concept3">
+                <div class="slide-container">
+                    <div class="content">
+                        <h2>Track Performance & Engagement</h2>
+                        <p>Comprehensive statistics show your progress, strengths, and areas for improvement. Stay motivated with achievements and milestones.</p>
+                        <ul style="margin-left: 1.5rem; margin-bottom: 2rem;">
+                            <li>Daily and weekly progress reports</li>
+                            <li>Time spent learning analytics</li>
+                            <li>Vocabulary growth tracking</li>
+                            <li>Skill level progression</li>
+                        </ul>
+                        <a href="https://app.jiayou.fr" class="cta-button" target="_blank">View Your Stats</a>
+                    </div>
+                    <div class="image-placeholder">
+                        <i class="fas fa-chart-line"></i>
+                        <p>Performance statistics dashboard</p>
+                    </div>
+                </div>
+                <div class="scroll-down" onclick="scrollToNextSection()">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </section>
+
+            <section id="concept4">
+                <div class="slide-container">
+                    <div class="content">
+                        <h2>Challenge Friends & Climb Leaderboards</h2>
+                        <p>Compete with friends in language duels and climb to the top of global leaderboards. Learning is more fun with friendly competition!</p>
+                        <ul style="margin-left: 1.5rem; margin-bottom: 2rem;">
+                            <li>Challenge friends to vocabulary duels</li>
+                            <li>Global and friend leaderboards</li>
+                            <li>Weekly challenges with rewards</li>
+                            <li>Team competitions and events</li>
+                        </ul>
+                        <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Start a Duel</a>
+                    </div>
+                    <div class="image-placeholder">
+                        <i class="fas fa-trophy"></i>
+                        <p>Leaderboard and duel interface</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer>
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>Jiayou</h3>
+                        <p>Revolutionizing language learning through technology, community, and gamification.</p>
+                        <div class="app-badges">
+                            <div style="background-color: #333; padding: 10px; border-radius: 8px; display: inline-block; margin-right: 10px;">
+                                <i class="fab fa-apple" style="color: white; font-size: 1.5rem;"></i>
+                            </div>
+                            <div style="background-color: #333; padding: 10px; border-radius: 8px; display: inline-block;">
+                                <i class="fab fa-google-play" style="color: white; font-size: 1.5rem;"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Features</h3>
+                        <p>Word Capture</p>
+                        <p>Interactive Lessons</p>
+                        <p>Progress Tracking</p>
+                        <p>Social Challenges</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Contact</h3>
+                        <p><i class="fas fa-envelope" style="margin-right: 10px;"></i> contact@jiayou-app.com</p>
+                        <p><i class="fas fa-phone" style="margin-right: 10px;"></i> +1 (555) 123-4567</p>
+                        <p><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> San Francisco, CA</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Access App</h3>
+                        <p>Already have an account?</p>
+                        <a href="https://app.jiayou.fr" class="cta-button" style="display: inline-block; margin-top: 10px;" target="_blank">Go to App</a>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2023 Jiayou. All rights reserved.</p>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            const slideContainers = document.querySelectorAll('.slide-container');
+            const indicatorDots = document.querySelectorAll('.indicator-dot');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            const mainContainer = document.getElementById('main-container');
+            
+            let currentSection = 0;
+            let isScrolling = false;
+            let scrollTimeout;
+            
+            // Function to activate a specific section
+            function activateSection(index) {
+                // Remove active class from all slides and indicators
+                slideContainers.forEach(container => {
+                    container.classList.remove('active');
+                });
+                
+                indicatorDots.forEach(dot => {
+                    dot.classList.remove('active');
+                });
+                
+                // Add active class to current slide and indicator
+                if (slideContainers[index]) {
+                    slideContainers[index].classList.add('active');
+                }
+                
+                if (indicatorDots[index]) {
+                    indicatorDots[index].classList.add('active');
+                }
+                
+                // Update current section
+                currentSection = index;
+            }
+            
+            // Function to scroll to next section
+            function scrollToNextSection() {
+                const nextSection = Math.min(currentSection + 1, sections.length - 1);
+                sections[nextSection].scrollIntoView({ behavior: 'smooth' });
+            }
+            
+            // Function to scroll to specific section
+            function scrollToSection(index) {
+                if (index >= 0 && index < sections.length) {
+                    sections[index].scrollIntoView({ behavior: 'smooth' });
+                    activateSection(index);
+                }
+            }
+            
+            // Scroll indicator click events
+            indicatorDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    scrollToSection(index);
+                });
+            });
+            
+            // Navigation link click events
+            navLinks.forEach((link, index) => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    scrollToSection(index);
+                });
+            });
+            
+            // Handle scroll events for section detection
+            mainContainer.addEventListener('scroll', () => {
+                if (isScrolling) return;
+                
+                clearTimeout(scrollTimeout);
+                
+                // Calculate which section is currently in view
+                const containerScroll = mainContainer.scrollTop;
+                const containerHeight = mainContainer.clientHeight;
+                const scrollPosition = containerScroll + containerHeight / 2;
+                
+                let newSectionIndex = 0;
+                let minDistance = Infinity;
+                
+                sections.forEach((section, index) => {
+                    const sectionTop = section.offsetTop;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    
+                    // Calculate distance from section center
+                    const sectionCenter = sectionTop + section.offsetHeight / 2;
+                    const distance = Math.abs(scrollPosition - sectionCenter);
+                    
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        newSectionIndex = index;
+                    }
+                });
+                
+                // Only update if section changed
+                if (newSectionIndex !== currentSection) {
+                    activateSection(newSectionIndex);
+                }
+                
+                // Set scrolling flag to prevent multiple triggers
+                isScrolling = true;
+                scrollTimeout = setTimeout(() => {
+                    isScrolling = false;
+                }, 500);
+            });
+            
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+                    e.preventDefault();
+                    const nextSection = Math.min(currentSection + 1, sections.length - 1);
+                    scrollToSection(nextSection);
+                } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    const prevSection = Math.max(currentSection - 1, 0);
+                    scrollToSection(prevSection);
+                } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    scrollToSection(0);
+                } else if (e.key === 'End') {
+                    e.preventDefault();
+                    scrollToSection(sections.length - 1);
+                }
+            });
+            
+            // Touch events for mobile with improved detection
+            let touchStartY = 0;
+            let touchStartTime = 0;
+            
+            mainContainer.addEventListener('touchstart', (e) => {
+                touchStartY = e.touches[0].clientY;
+                touchStartTime = Date.now();
+            }, { passive: true });
+            
+            mainContainer.addEventListener('touchend', (e) => {
+                const touchEndY = e.changedTouches[0].clientY;
+                const touchEndTime = Date.now();
+                const touchDiff = touchStartY - touchEndY;
+                const timeDiff = touchEndTime - touchStartTime;
+                
+                // Check if it's a quick swipe (less than 300ms)
+                if (timeDiff < 300 && Math.abs(touchDiff) > 50) {
+                    if (touchDiff > 0) {
+                        // Swipe up - go to next section
+                        const nextSection = Math.min(currentSection + 1, sections.length - 1);
+                        scrollToSection(nextSection);
+                    } else {
+                        // Swipe down - go to previous section
+                        const prevSection = Math.max(currentSection - 1, 0);
+                        scrollToSection(prevSection);
+                    }
+                }
+            }, { passive: true });
+            
+            // Expose scrollToNextSection to global scope for onclick
+            window.scrollToNextSection = scrollToNextSection;
+            
+            // Initialize first section
+            activateSection(0);
+        });
+    </script>
+</body>
+</html>
