@@ -13,9 +13,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: #f8f9fa;
@@ -23,7 +21,7 @@
             overflow-x: hidden;
             line-height: 1.6;
             height: 100vh;
-            overflow-y: hidden; /* Cache la barre de scroll native */
+            overflow-y: hidden;
         }
 
         /* Navigation */
@@ -31,64 +29,120 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 1rem 5%;
+            background-color: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            padding: 0.9rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1px 12px rgba(0, 0, 0, 0.08);
             z-index: 1000;
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: #4a6cf7;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
-
-        .logo i {
-            margin-right: 10px;
         }
 
         .nav-links {
             display: flex;
             gap: 2rem;
+            align-items: center;
         }
 
         .nav-links a {
             text-decoration: none;
             color: #555;
             font-weight: 500;
-            transition: color 0.3s;
+            font-size: 0.92rem;
+            transition: color 0.25s;
         }
 
-        .nav-links a:hover {
-            color: #4a6cf7;
+        .nav-links a:hover { color: #4a6cf7; }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
         .cta-button {
             background-color: #4a6cf7;
             color: white;
             border: none;
-            padding: 0.7rem 1.5rem;
+            padding: 0.6rem 1.3rem;
             border-radius: 50px;
             font-weight: 600;
+            font-size: 0.88rem;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.25s;
             text-decoration: none;
             display: inline-block;
+            white-space: nowrap;
         }
 
         .cta-button:hover {
             background-color: #3a5bd9;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(58, 91, 217, 0.2);
+            box-shadow: 0 6px 18px rgba(74, 108, 247, 0.28);
         }
 
-        /* Container principal pour le scroll */
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background-color: #333;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 0.5rem 5%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            z-index: 999;
+            flex-direction: column;
+        }
+
+        .mobile-menu.open { display: flex; }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: #444;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.85rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            transition: color 0.2s;
+        }
+
+        .mobile-menu a:last-child { border-bottom: none; }
+        .mobile-menu a:hover { color: #4a6cf7; }
+
+        /* Main scroll container */
         .main-container {
             height: 100vh;
             overflow-y: auto;
@@ -96,7 +150,7 @@
             scroll-behavior: smooth;
         }
 
-        /* Sections avec scroll snapping */
+        /* Sections */
         section {
             min-height: 100vh;
             width: 100%;
@@ -109,7 +163,6 @@
             scroll-snap-stop: always;
         }
 
-        /* Slide effect container */
         .slide-container {
             width: 100%;
             height: 100%;
@@ -120,8 +173,8 @@
             align-items: center;
             padding: 0 5%;
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease-out;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
             pointer-events: none;
         }
 
@@ -131,277 +184,379 @@
             pointer-events: all;
         }
 
-        /* Content styles */
+        /* Content */
         .content {
             width: 50%;
             z-index: 2;
         }
 
+        .section-tag {
+            display: inline-block;
+            background-color: rgba(74, 108, 247, 0.1);
+            color: #4a6cf7;
+            padding: 0.28rem 0.85rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+        }
+
         .content h1 {
-            font-size: 3.2rem;
-            margin-bottom: 1.5rem;
-            color: #222;
+            font-size: 2.9rem;
+            margin-bottom: 1.2rem;
+            color: #1a1a2e;
+            line-height: 1.2;
         }
 
         .content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: #222;
+            font-size: 2.3rem;
+            margin-bottom: 1.2rem;
+            color: #1a1a2e;
+            line-height: 1.2;
         }
 
         .content p {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #666;
+            margin-bottom: 1.8rem;
+            max-width: 480px;
+        }
+
+        .feature-list {
+            list-style: none;
             margin-bottom: 2rem;
-            max-width: 500px;
+        }
+
+        .feature-list li {
+            padding: 0.35rem 0;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 0.97rem;
+        }
+
+        .feature-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background-color: #4a6cf7;
+            border-radius: 50%;
+            flex-shrink: 0;
         }
 
         .stats {
             display: flex;
-            gap: 3rem;
-            margin-top: 2rem;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
         }
 
-        .stat-item {
-            text-align: center;
-        }
+        .stat-item { text-align: center; }
 
         .stat-number {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
             color: #4a6cf7;
             display: block;
         }
 
         .stat-label {
-            font-size: 1rem;
-            color: #777;
+            font-size: 0.85rem;
+            color: #888;
         }
 
-        /* Image placeholder */
-        .image-placeholder {
-            width: 45%;
+        /* Section visuals */
+        .section-visual {
+            width: 44%;
             height: 400px;
-            background-color: #e0e0e0;
-            border-radius: 10px;
-            margin-left: 5%;
+            border-radius: 18px;
+            margin-left: 6%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: #888;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+            flex-shrink: 0;
         }
 
-        .image-placeholder i {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            color: #aaa;
+        .section-visual i {
+            font-size: 5rem;
+            opacity: 0.92;
         }
 
-        /* Section-specific colors */
-        #introduction {
-            background-color: #f0f5ff;
+        .section-visual .visual-label {
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            opacity: 0.75;
+            font-weight: 500;
+            text-align: center;
+            padding: 0 1.5rem;
         }
 
-        #concept1 {
-            background-color: #f9f9f9;
+        /* Section backgrounds and visual colors */
+        #introduction { background: linear-gradient(135deg, #eef2ff 0%, #f5f0ff 100%); }
+        #introduction .section-visual {
+            background: linear-gradient(135deg, #4a6cf7 0%, #7c3aed 100%);
+            color: white;
         }
 
-        #concept2 {
-            background-color: #f0f8ff;
+        #concept1 { background: linear-gradient(135deg, #f0fffe 0%, #e8f4ff 100%); }
+        #concept1 .section-visual {
+            background: linear-gradient(135deg, #0694a2 0%, #1c64f2 100%);
+            color: white;
         }
 
-        #concept3 {
-            background-color: #f5f0ff;
+        #concept2 { background: linear-gradient(135deg, #fff8ed 0%, #fff4e6 100%); }
+        #concept2 .section-visual {
+            background: linear-gradient(135deg, #e05252 0%, #e8771a 100%);
+            color: white;
         }
 
-        #concept4 {
-            background-color: #fff0f5;
+        #concept3 { background: linear-gradient(135deg, #f0faf5 0%, #e6f9ef 100%); }
+        #concept3 .section-visual {
+            background: linear-gradient(135deg, #057a55 0%, #0694a2 100%);
+            color: white;
         }
 
-        /* Scroll down indicator */
+        #concept4 { background: linear-gradient(135deg, #fffaf0 0%, #fef9ec 100%); }
+        #concept4 .section-visual {
+            background: linear-gradient(135deg, #d97706 0%, #dc2626 100%);
+            color: white;
+        }
+
+        /* Scroll down arrow */
         .scroll-down {
             position: absolute;
-            bottom: 30px;
+            bottom: 26px;
             left: 50%;
             transform: translateX(-50%);
             color: #4a6cf7;
-            font-size: 1.5rem;
-            animation: bounce 2s infinite;
+            font-size: 1.1rem;
+            animation: bounce 2s ease-in-out infinite;
             cursor: pointer;
             z-index: 10;
+            opacity: 0.5;
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-5px);
-            }
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(7px); }
+        }
+
+        /* Scroll indicator dots */
+        .scroll-indicator {
+            position: fixed;
+            right: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .indicator-dot {
+            position: relative;
+            width: 9px;
+            height: 9px;
+            background-color: #ccc;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .indicator-dot::after {
+            content: attr(data-label);
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(26, 26, 46, 0.8);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+
+        .indicator-dot:hover::after { opacity: 1; }
+
+        .indicator-dot.active {
+            background-color: #4a6cf7;
+            transform: scale(1.5);
         }
 
         /* Footer */
         footer {
-            background-color: #222;
+            background-color: #1a1a2e;
             color: #ddd;
             padding: 4rem 5% 2rem;
             scroll-snap-align: start;
-            min-height: 50vh;
+            min-height: 45vh;
         }
 
         .footer-content {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 3rem;
+            gap: 2.5rem;
             margin-bottom: 3rem;
         }
 
         .footer-section {
             flex: 1;
-            min-width: 250px;
+            min-width: 180px;
         }
 
         .footer-section h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            margin-bottom: 1.1rem;
             color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .footer-section p {
-            margin-bottom: 1rem;
+            margin-bottom: 0.6rem;
             color: #aaa;
+            font-size: 0.88rem;
         }
 
-        .app-badges img {
-            height: 40px;
-            margin-right: 10px;
-            margin-top: 10px;
+        .footer-links a {
+            display: block;
+            color: #aaa;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            font-size: 0.88rem;
+            transition: color 0.2s;
         }
+
+        .footer-links a:hover { color: white; }
+
+        .app-badges {
+            display: flex;
+            gap: 8px;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .app-badge {
+            background-color: #2a2a45;
+            padding: 7px 12px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: white;
+            font-size: 0.78rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            border: 1px solid #3a3a5a;
+        }
+
+        .app-badge:hover { background-color: #35355a; }
+        .app-badge i { font-size: 1.1rem; }
 
         .copyright {
             text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid #444;
-            color: #aaa;
+            padding-top: 1.8rem;
+            border-top: 1px solid #2a2a45;
+            color: #555;
+            font-size: 0.82rem;
         }
 
-        /* Scroll indicator */
-        .scroll-indicator {
-            position: fixed;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 100;
-        }
-
-        .indicator-dot {
-            width: 12px;
-            height: 12px;
-            background-color: #ccc;
-            border-radius: 50%;
-            margin: 15px 0;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .indicator-dot.active {
-            background-color: #4a6cf7;
-            transform: scale(1.3);
-        }
-
-        /* Mobile responsiveness */
+        /* Responsive */
         @media (max-width: 992px) {
-            .content, .image-placeholder {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+
+            .content { width: 100%; }
+
+            .section-visual {
                 width: 100%;
+                height: 200px;
                 margin-left: 0;
+                margin-top: 2rem;
             }
-            
-            .content h1 {
-                font-size: 2.5rem;
-            }
-            
-            .content h2 {
-                font-size: 2rem;
-            }
-            
+
+            .content h1 { font-size: 2.3rem; }
+            .content h2 { font-size: 1.9rem; }
+
             .slide-container {
                 flex-direction: column;
                 justify-content: center;
-                padding-top: 100px;
+                padding-top: 80px;
+                padding-bottom: 60px;
+                overflow-y: auto;
             }
-            
-            .image-placeholder {
-                height: 300px;
-                margin-top: 3rem;
-            }
-            
-            .nav-links {
-                display: none;
-            }
+
+            .content p { max-width: 100%; }
+            .scroll-indicator { right: 10px; }
         }
 
         @media (max-width: 576px) {
-            .content h1 {
-                font-size: 2rem;
-            }
-            
-            .content h2 {
-                font-size: 1.7rem;
-            }
-            
-            .stats {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-            
-            section {
-                padding: 0 1.5rem;
-            }
-            
-            /* Sur mobile, on réactive le scroll normal */
-            body {
-                overflow-y: auto;
-            }
-            
-            .main-container {
-                overflow-y: auto;
-                scroll-snap-type: none;
-            }
+            .content h1 { font-size: 1.9rem; }
+            .content h2 { font-size: 1.65rem; }
+            .stats { gap: 1.5rem; }
+            section { padding: 0 1.5rem; }
+            .slide-container { padding-left: 1.5rem; padding-right: 1.5rem; }
+            .section-visual { display: none; }
+
+            body { overflow-y: auto; }
+            .main-container { scroll-snap-type: none; }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
-        <a href="#" class="logo">加油 Jiayou!</a>
-        <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Connect / Register</a>
+        <a href="#introduction" class="logo">加油 Jiayou!</a>
+        <div class="nav-links">
+            <a href="#introduction" class="nav-link">Home</a>
+            <a href="#concept1" class="nav-link">Capture</a>
+            <a href="#concept2" class="nav-link">Learn</a>
+            <a href="#concept3" class="nav-link">Track</a>
+            <a href="#concept4" class="nav-link">Challenge</a>
+        </div>
+        <div class="nav-right">
+            <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Connect / Register</a>
+            <button class="hamburger" id="hamburger-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
     </nav>
 
-    <!-- Scroll indicator -->
-    <div class="scroll-indicator">
-        <div class="indicator-dot active" data-section="introduction"></div>
-        <div class="indicator-dot" data-section="concept1"></div>
-        <div class="indicator-dot" data-section="concept2"></div>
-        <div class="indicator-dot" data-section="concept3"></div>
-        <div class="indicator-dot" data-section="concept4"></div>
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#introduction">Home</a>
+        <a href="#concept1">Capture</a>
+        <a href="#concept2">Learn</a>
+        <a href="#concept3">Track</a>
+        <a href="#concept4">Challenge</a>
     </div>
 
-    <!-- Container principal pour le scroll -->
+    <div class="scroll-indicator">
+        <div class="indicator-dot active" data-section="introduction" data-label="Home"></div>
+        <div class="indicator-dot" data-section="concept1" data-label="Capture"></div>
+        <div class="indicator-dot" data-section="concept2" data-label="Learn"></div>
+        <div class="indicator-dot" data-section="concept3" data-label="Track"></div>
+        <div class="indicator-dot" data-section="concept4" data-label="Challenge"></div>
+    </div>
+
     <div class="main-container" id="main-container">
-        <!-- Sections -->
         <main>
             <section id="introduction">
                 <div class="slide-container active">
                     <div class="content">
-                        <h1>Jiayou - Master Languages Faster</h1>
+                        <span class="section-tag">Language Learning</span>
+                        <h1>Master Languages Faster with Jiayou</h1>
                         <p>An innovative app that transforms how you learn and practice languages through interactive challenges, social duels, and personalized tracking.</p>
-                        
                         <div class="stats">
                             <div class="stat-item">
                                 <span class="stat-number">500K+</span>
@@ -413,15 +568,14 @@
                             </div>
                             <div class="stat-item">
                                 <span class="stat-number">95%</span>
-                                <span class="stat-label">Satisfaction Rate</span>
+                                <span class="stat-label">Satisfaction</span>
                             </div>
                         </div>
-                        
                         <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Start Learning Now</a>
                     </div>
-                    <div class="image-placeholder">
+                    <div class="section-visual">
                         <i class="fas fa-globe-americas"></i>
-                        <p>Global language learning community</p>
+                        <span class="visual-label">Global language learning community</span>
                     </div>
                 </div>
                 <div class="scroll-down" onclick="scrollToNextSection()">
@@ -432,9 +586,10 @@
             <section id="concept1">
                 <div class="slide-container">
                     <div class="content">
+                        <span class="section-tag">Feature 1</span>
                         <h2>Capture Words Instantly</h2>
                         <p>Use your camera to capture any text in a foreign language. Jiayou instantly translates and saves new vocabulary to your personal word bank.</p>
-                        <ul style="margin-left: 1.5rem; margin-bottom: 2rem;">
+                        <ul class="feature-list">
                             <li>Real-time translation with pronunciation</li>
                             <li>Save words with context for better retention</li>
                             <li>Create flashcards from captured content</li>
@@ -442,9 +597,9 @@
                         </ul>
                         <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Try Capture Feature</a>
                     </div>
-                    <div class="image-placeholder">
+                    <div class="section-visual">
                         <i class="fas fa-camera"></i>
-                        <p>Capture text feature demonstration</p>
+                        <span class="visual-label">Capture text in any language</span>
                     </div>
                 </div>
                 <div class="scroll-down" onclick="scrollToNextSection()">
@@ -455,9 +610,10 @@
             <section id="concept2">
                 <div class="slide-container">
                     <div class="content">
+                        <span class="section-tag">Feature 2</span>
                         <h2>Learn & Quiz Your Knowledge</h2>
                         <p>Interactive lessons and quizzes adapted to your level and learning pace. Our AI identifies your weak spots and focuses on them.</p>
-                        <ul style="margin-left: 1.5rem; margin-bottom: 2rem;">
+                        <ul class="feature-list">
                             <li>Personalized daily lessons</li>
                             <li>Interactive quizzes with instant feedback</li>
                             <li>Spaced repetition system</li>
@@ -465,9 +621,9 @@
                         </ul>
                         <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Try a Quiz</a>
                     </div>
-                    <div class="image-placeholder">
+                    <div class="section-visual">
                         <i class="fas fa-brain"></i>
-                        <p>Interactive quiz interface</p>
+                        <span class="visual-label">AI-powered adaptive learning</span>
                     </div>
                 </div>
                 <div class="scroll-down" onclick="scrollToNextSection()">
@@ -478,9 +634,10 @@
             <section id="concept3">
                 <div class="slide-container">
                     <div class="content">
+                        <span class="section-tag">Feature 3</span>
                         <h2>Track Performance & Engagement</h2>
                         <p>Comprehensive statistics show your progress, strengths, and areas for improvement. Stay motivated with achievements and milestones.</p>
-                        <ul style="margin-left: 1.5rem; margin-bottom: 2rem;">
+                        <ul class="feature-list">
                             <li>Daily and weekly progress reports</li>
                             <li>Time spent learning analytics</li>
                             <li>Vocabulary growth tracking</li>
@@ -488,9 +645,9 @@
                         </ul>
                         <a href="https://app.jiayou.fr" class="cta-button" target="_blank">View Your Stats</a>
                     </div>
-                    <div class="image-placeholder">
+                    <div class="section-visual">
                         <i class="fas fa-chart-line"></i>
-                        <p>Performance statistics dashboard</p>
+                        <span class="visual-label">Detailed progress analytics</span>
                     </div>
                 </div>
                 <div class="scroll-down" onclick="scrollToNextSection()">
@@ -501,9 +658,10 @@
             <section id="concept4">
                 <div class="slide-container">
                     <div class="content">
+                        <span class="section-tag">Feature 4</span>
                         <h2>Challenge Friends & Climb Leaderboards</h2>
                         <p>Compete with friends in language duels and climb to the top of global leaderboards. Learning is more fun with friendly competition!</p>
-                        <ul style="margin-left: 1.5rem; margin-bottom: 2rem;">
+                        <ul class="feature-list">
                             <li>Challenge friends to vocabulary duels</li>
                             <li>Global and friend leaderboards</li>
                             <li>Weekly challenges with rewards</li>
@@ -511,49 +669,51 @@
                         </ul>
                         <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Start a Duel</a>
                     </div>
-                    <div class="image-placeholder">
+                    <div class="section-visual">
                         <i class="fas fa-trophy"></i>
-                        <p>Leaderboard and duel interface</p>
+                        <span class="visual-label">Compete and win with friends</span>
                     </div>
                 </div>
             </section>
 
-            <!-- Footer -->
             <footer>
                 <div class="footer-content">
                     <div class="footer-section">
                         <h3>Jiayou</h3>
                         <p>Revolutionizing language learning through technology, community, and gamification.</p>
                         <div class="app-badges">
-                            <div style="background-color: #333; padding: 10px; border-radius: 8px; display: inline-block; margin-right: 10px;">
-                                <i class="fab fa-apple" style="color: white; font-size: 1.5rem;"></i>
+                            <div class="app-badge">
+                                <i class="fab fa-apple"></i>
+                                <span>App Store</span>
                             </div>
-                            <div style="background-color: #333; padding: 10px; border-radius: 8px; display: inline-block;">
-                                <i class="fab fa-google-play" style="color: white; font-size: 1.5rem;"></i>
+                            <div class="app-badge">
+                                <i class="fab fa-google-play"></i>
+                                <span>Google Play</span>
                             </div>
                         </div>
                     </div>
                     <div class="footer-section">
                         <h3>Features</h3>
-                        <p>Word Capture</p>
-                        <p>Interactive Lessons</p>
-                        <p>Progress Tracking</p>
-                        <p>Social Challenges</p>
+                        <div class="footer-links">
+                            <a href="#concept1">Word Capture</a>
+                            <a href="#concept2">Interactive Lessons</a>
+                            <a href="#concept3">Progress Tracking</a>
+                            <a href="#concept4">Social Challenges</a>
+                        </div>
                     </div>
                     <div class="footer-section">
                         <h3>Contact</h3>
-                        <p><i class="fas fa-envelope" style="margin-right: 10px;"></i> contact@jiayou-app.com</p>
-                        <p><i class="fas fa-phone" style="margin-right: 10px;"></i> +1 (555) 123-4567</p>
-                        <p><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> San Francisco, CA</p>
+                        <p><i class="fas fa-envelope" style="margin-right: 8px; color: #4a6cf7;"></i>contact@jiayou-app.com</p>
+                        <p><i class="fas fa-map-marker-alt" style="margin-right: 8px; color: #4a6cf7;"></i>San Francisco, CA</p>
                     </div>
                     <div class="footer-section">
                         <h3>Access App</h3>
                         <p>Already have an account?</p>
-                        <a href="https://app.jiayou.fr" class="cta-button" style="display: inline-block; margin-top: 10px;" target="_blank">Go to App</a>
+                        <a href="https://app.jiayou.fr" class="cta-button" style="margin-top: 10px;" target="_blank">Go to App</a>
                     </div>
                 </div>
                 <div class="copyright">
-                    <p>&copy; 2023 Jiayou. All rights reserved.</p>
+                    <p>&copy; 2024 Jiayou. All rights reserved.</p>
                 </div>
             </footer>
         </main>
@@ -564,117 +724,90 @@
             const sections = document.querySelectorAll('section');
             const slideContainers = document.querySelectorAll('.slide-container');
             const indicatorDots = document.querySelectorAll('.indicator-dot');
-            const navLinks = document.querySelectorAll('.nav-links a');
             const mainContainer = document.getElementById('main-container');
-            
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
             let currentSection = 0;
             let isScrolling = false;
             let scrollTimeout;
-            
-            // Function to activate a specific section
+
+            // Hamburger toggle
+            hamburgerBtn.addEventListener('click', () => {
+                hamburgerBtn.classList.toggle('open');
+                mobileMenu.classList.toggle('open');
+            });
+
+            // Close mobile menu on link click
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburgerBtn.classList.remove('open');
+                    mobileMenu.classList.remove('open');
+                });
+            });
+
             function activateSection(index) {
-                // Remove active class from all slides and indicators
-                slideContainers.forEach(container => {
-                    container.classList.remove('active');
-                });
-                
-                indicatorDots.forEach(dot => {
-                    dot.classList.remove('active');
-                });
-                
-                // Add active class to current slide and indicator
-                if (slideContainers[index]) {
-                    slideContainers[index].classList.add('active');
-                }
-                
-                if (indicatorDots[index]) {
-                    indicatorDots[index].classList.add('active');
-                }
-                
-                // Update current section
+                slideContainers.forEach(c => c.classList.remove('active'));
+                indicatorDots.forEach(d => d.classList.remove('active'));
+                if (slideContainers[index]) slideContainers[index].classList.add('active');
+                if (indicatorDots[index]) indicatorDots[index].classList.add('active');
                 currentSection = index;
             }
-            
-            // Function to scroll to next section
+
             function scrollToNextSection() {
-                const nextSection = Math.min(currentSection + 1, sections.length - 1);
-                sections[nextSection].scrollIntoView({ behavior: 'smooth' });
+                const next = Math.min(currentSection + 1, sections.length - 1);
+                sections[next].scrollIntoView({ behavior: 'smooth' });
             }
-            
-            // Function to scroll to specific section
+
             function scrollToSection(index) {
                 if (index >= 0 && index < sections.length) {
                     sections[index].scrollIntoView({ behavior: 'smooth' });
                     activateSection(index);
                 }
             }
-            
-            // Scroll indicator click events
-            indicatorDots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    scrollToSection(index);
-                });
+
+            indicatorDots.forEach((dot, i) => {
+                dot.addEventListener('click', () => scrollToSection(i));
             });
-            
-            // Navigation link click events
-            navLinks.forEach((link, index) => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    scrollToSection(index);
-                });
-            });
-            
-            // Handle scroll events for section detection
-            mainContainer.addEventListener('scroll', () => {
-                if (isScrolling) return;
-                
-                clearTimeout(scrollTimeout);
-                
-                // Calculate which section is currently in view
-                const containerScroll = mainContainer.scrollTop;
-                const containerHeight = mainContainer.clientHeight;
-                const scrollPosition = containerScroll + containerHeight / 2;
-                
-                let newSectionIndex = 0;
-                let minDistance = Infinity;
-                
-                sections.forEach((section, index) => {
-                    const sectionTop = section.offsetTop;
-                    const sectionBottom = sectionTop + section.offsetHeight;
-                    
-                    // Calculate distance from section center
-                    const sectionCenter = sectionTop + section.offsetHeight / 2;
-                    const distance = Math.abs(scrollPosition - sectionCenter);
-                    
-                    if (distance < minDistance) {
-                        minDistance = distance;
-                        newSectionIndex = index;
+
+            // Nav & mobile menu links
+            document.querySelectorAll('.nav-link, .mobile-menu a').forEach(link => {
+                link.addEventListener('click', e => {
+                    const href = link.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        e.preventDefault();
+                        const targetIndex = Array.from(sections).findIndex(s => s.id === href.slice(1));
+                        if (targetIndex >= 0) scrollToSection(targetIndex);
                     }
                 });
-                
-                // Only update if section changed
-                if (newSectionIndex !== currentSection) {
-                    activateSection(newSectionIndex);
-                }
-                
-                // Set scrolling flag to prevent multiple triggers
-                isScrolling = true;
-                scrollTimeout = setTimeout(() => {
-                    isScrolling = false;
-                }, 500);
             });
-            
 
-            // Keyboard navigation
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+            mainContainer.addEventListener('scroll', () => {
+                if (isScrolling) return;
+                clearTimeout(scrollTimeout);
+
+                const scrollPos = mainContainer.scrollTop + mainContainer.clientHeight / 2;
+                let newIndex = 0;
+                let minDist = Infinity;
+
+                sections.forEach((section, i) => {
+                    const dist = Math.abs(scrollPos - (section.offsetTop + section.offsetHeight / 2));
+                    if (dist < minDist) { minDist = dist; newIndex = i; }
+                });
+
+                if (newIndex !== currentSection) activateSection(newIndex);
+
+                isScrolling = true;
+                scrollTimeout = setTimeout(() => { isScrolling = false; }, 500);
+            });
+
+            document.addEventListener('keydown', e => {
+                if (e.key === 'ArrowDown' || e.key === ' ') {
                     e.preventDefault();
-                    const nextSection = Math.min(currentSection + 1, sections.length - 1);
-                    scrollToSection(nextSection);
-                } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                    scrollToSection(Math.min(currentSection + 1, sections.length - 1));
+                } else if (e.key === 'ArrowUp') {
                     e.preventDefault();
-                    const prevSection = Math.max(currentSection - 1, 0);
-                    scrollToSection(prevSection);
+                    scrollToSection(Math.max(currentSection - 1, 0));
                 } else if (e.key === 'Home') {
                     e.preventDefault();
                     scrollToSection(0);
@@ -683,40 +816,26 @@
                     scrollToSection(sections.length - 1);
                 }
             });
-            
-            // Touch events for mobile with improved detection
+
             let touchStartY = 0;
             let touchStartTime = 0;
-            
-            mainContainer.addEventListener('touchstart', (e) => {
+
+            mainContainer.addEventListener('touchstart', e => {
                 touchStartY = e.touches[0].clientY;
                 touchStartTime = Date.now();
             }, { passive: true });
-            
-            mainContainer.addEventListener('touchend', (e) => {
-                const touchEndY = e.changedTouches[0].clientY;
-                const touchEndTime = Date.now();
-                const touchDiff = touchStartY - touchEndY;
-                const timeDiff = touchEndTime - touchStartTime;
-                
-                // Check if it's a quick swipe (less than 300ms)
-                if (timeDiff < 300 && Math.abs(touchDiff) > 50) {
-                    if (touchDiff > 0) {
-                        // Swipe up - go to next section
-                        const nextSection = Math.min(currentSection + 1, sections.length - 1);
-                        scrollToSection(nextSection);
-                    } else {
-                        // Swipe down - go to previous section
-                        const prevSection = Math.max(currentSection - 1, 0);
-                        scrollToSection(prevSection);
-                    }
+
+            mainContainer.addEventListener('touchend', e => {
+                const diff = touchStartY - e.changedTouches[0].clientY;
+                const time = Date.now() - touchStartTime;
+                if (time < 300 && Math.abs(diff) > 50) {
+                    scrollToSection(diff > 0
+                        ? Math.min(currentSection + 1, sections.length - 1)
+                        : Math.max(currentSection - 1, 0));
                 }
             }, { passive: true });
-            
-            // Expose scrollToNextSection to global scope for onclick
+
             window.scrollToNextSection = scrollToNextSection;
-            
-            // Initialize first section
             activateSection(0);
         });
     </script>
