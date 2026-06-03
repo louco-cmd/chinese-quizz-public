@@ -21,6 +21,7 @@
             overflow-x: hidden;
             line-height: 1.6;
             height: 100vh;
+            height: 100svh;
             overflow-y: hidden;
         }
 
@@ -145,6 +146,7 @@
         /* Main scroll container */
         .main-container {
             height: 100vh;
+            height: 100svh;
             overflow-y: auto;
             scroll-snap-type: y mandatory;
             scroll-behavior: smooth;
@@ -153,6 +155,7 @@
         /* Sections */
         section {
             min-height: 100vh;
+            min-height: 100svh;
             width: 100%;
             display: flex;
             align-items: center;
@@ -507,9 +510,6 @@
             section { padding: 0 1.5rem; }
             .slide-container { padding-left: 1.5rem; padding-right: 1.5rem; }
             .section-visual { display: none; }
-
-            body { overflow-y: auto; }
-            .main-container { scroll-snap-type: none; }
         }
     </style>
 </head>
