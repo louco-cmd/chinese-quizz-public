@@ -834,24 +834,6 @@
                 }
             });
 
-            let touchStartY = 0;
-            let touchStartTime = 0;
-
-            mainContainer.addEventListener('touchstart', e => {
-                touchStartY = e.touches[0].clientY;
-                touchStartTime = Date.now();
-            }, { passive: true });
-
-            mainContainer.addEventListener('touchend', e => {
-                const diff = touchStartY - e.changedTouches[0].clientY;
-                const time = Date.now() - touchStartTime;
-                if (time < 300 && Math.abs(diff) > 50) {
-                    scrollToSection(diff > 0
-                        ? Math.min(currentSection + 1, sections.length - 1)
-                        : Math.max(currentSection - 1, 0));
-                }
-            }, { passive: true });
-
             window.scrollToNextSection = scrollToNextSection;
             activateSection(0);
         });
