@@ -1,0 +1,39 @@
+index.html
+  s_8ff8b25838cabc::t_e1c5336db4162a 330-332,335-340
+  s_8ff8b25838cabc::t_13287d2073abc3 535
+  s_8ff8b25838cabc::t_9605978efc108b 544,550,574
+  s_8ff8b25838cabc::t_1519a10a54d2e0 674
+  s_8ff8b25838cabc::t_7549a773c60a61 690
+  s_8ff8b25838cabc::t_deaf8f370dee07 658
+  s_8ff8b25838cabc::t_308d3defa7bb77 6-24
+  s_8ff8b25838cabc::t_592745556787c4 363
+  s_8ff8b25838cabc::t_4dd03f799f451c 524,528,538,543,549,552-554,556,558,562-564,567,571
+  s_8ff8b25838cabc::t_97e9b4d09461ab 626-627
+  s_8ff8b25838cabc::t_561f4d3227c32a 642
+  s_8ff8b25838cabc::t_45b9e03d44ef8e 542,547-548,559-561
+  s_8ff8b25838cabc::t_ea1c154a82ff04 448-449
+  s_8ff8b25838cabc::t_38d3f1168e651b 349-350,354-355,357-362,364-365,369-374
+  s_8ff8b25838cabc::t_6aa99fc10de6d2 565-566,569-570,572
+  s_8ff8b25838cabc::t_a462681b2a9ce4 530-534
+  s_8ff8b25838cabc::t_88fa68c862a246 343-348,353,368
+  s_8ff8b25838cabc::t_8580958a1c03db 580-583
+  s_8ff8b25838cabc::t_e586b1c298d3cf 557,568
+  s_8ff8b25838cabc::t_2474c6f9761102 573
+  s_8ff8b25838cabc::t_ed984febb6f55f 66-75
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.10-trip",
+  "base_commit_sha": "c4250e5530487aa182a05c4aeae97bc17ed4f596",
+  "prompts": {},
+  "sessions": {
+    "s_8ff8b25838cabc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9ce0a879-9695-4209-a067-61f81fb7dd08",
+        "model": "global.anthropic.claude-sonnet-4-6"
+      },
+      "human_author": "Louis Cochet <locochet.08@gmail.com>"
+    }
+  }
+}
