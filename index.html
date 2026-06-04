@@ -3,7 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jiayou - Language Learning App</title>
+    <title>Jiayou - Learn Chinese Faster</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="Icon app.png">
+    <link rel="apple-touch-icon" href="Icon app.png">
+
+    <!-- OG / Social -->
+    <meta property="og:title" content="Jiayou - Learn Chinese Faster">
+    <meta property="og:description" content="Master Chinese with Jiayou — capture words instantly, quiz yourself daily, track your progress, and challenge friends. The smarter way to learn.">
+    <meta property="og:image" content="Icon app.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jiayou.fr">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Jiayou - Learn Chinese Faster">
+    <meta name="twitter:description" content="Master Chinese with Jiayou — capture words instantly, quiz yourself daily, track your progress, and challenge friends.">
+    <meta name="twitter:image" content="Icon app.png">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -45,6 +63,16 @@
             font-weight: 700;
             color: #4a6cf7;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo img {
+            height: 32px;
+            width: 32px;
+            border-radius: 8px;
+            object-fit: cover;
         }
 
         .nav-links {
@@ -299,34 +327,51 @@
         }
 
         /* Section backgrounds and visual colors */
-        #introduction { background: linear-gradient(135deg, #eef2ff 0%, #f5f0ff 100%); }
-        #introduction .section-visual {
-            background: linear-gradient(135deg, #4a6cf7 0%, #7c3aed 100%);
-            color: white;
+        .section-visual--image {
+            background: none;
+            box-shadow: none;
         }
 
-        #concept1 { background: linear-gradient(135deg, #f0fffe 0%, #e8f4ff 100%); }
-        #concept1 .section-visual {
-            background: linear-gradient(135deg, #0694a2 0%, #1c64f2 100%);
-            color: white;
+        .section-visual--image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            filter: drop-shadow(0 10px 24px rgba(0,0,0,0.12));
         }
 
-        #concept2 { background: linear-gradient(135deg, #fff8ed 0%, #fff4e6 100%); }
-        #concept2 .section-visual {
-            background: linear-gradient(135deg, #e05252 0%, #e8771a 100%);
-            color: white;
+        /* All sections: no background, overflow visible for image bleed */
+        #introduction,
+        #concept1,
+        #concept2,
+        #concept3,
+        #concept4 {
+            background: #f8f9fa;
+            overflow: visible;
         }
 
-        #concept3 { background: linear-gradient(135deg, #f0faf5 0%, #e6f9ef 100%); }
-        #concept3 .section-visual {
-            background: linear-gradient(135deg, #057a55 0%, #0694a2 100%);
-            color: white;
+        .section-visual--image {
+            position: absolute;
+            right: 0;
+            top: 2rem;
+            width: 46%;
+            height: 130%;
+            background: none;
+            box-shadow: none;
+            border-radius: 0;
+            margin: 0;
+            padding-top: 4rem;
+            justify-content: flex-start;
+            align-items: center;
         }
 
-        #concept4 { background: linear-gradient(135deg, #fffaf0 0%, #fef9ec 100%); }
-        #concept4 .section-visual {
-            background: linear-gradient(135deg, #d97706 0%, #dc2626 100%);
-            color: white;
+        .section-visual--image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: top center;
+            border-radius: 0;
+            filter: drop-shadow(-8px 16px 32px rgba(0,0,0,0.14));
         }
 
         /* Scroll down arrow */
@@ -400,6 +445,8 @@
             color: #ddd;
             padding: 4rem 5% 2rem;
             scroll-snap-align: start;
+            position: relative;
+            z-index: 1;
             min-height: 45vh;
         }
 
@@ -474,48 +521,66 @@
             font-size: 0.82rem;
         }
 
-        /* Responsive */
+        /* Responsive — tablet & mobile unified */
         @media (max-width: 992px) {
             .nav-links { display: none; }
             .hamburger { display: flex; }
+            .scroll-indicator { right: 10px; }
 
-            .content { width: 100%; }
-
-            .section-visual {
-                width: 100%;
-                height: 200px;
-                margin-left: 0;
-                margin-top: 2rem;
+            #introduction,
+            #concept1,
+            #concept2,
+            #concept3,
+            #concept4 {
+                overflow: hidden;
             }
 
-            .content h1 { font-size: 2.3rem; }
-            .content h2 { font-size: 1.9rem; }
+            section { padding: 0 1.5rem; }
 
             .slide-container {
                 flex-direction: column;
-                justify-content: center;
-                padding-top: 80px;
-                padding-bottom: 60px;
-                overflow-y: auto;
+                justify-content: flex-start;
+                padding: 6rem 1.5rem 0;
+                overflow: hidden;
             }
 
-            .content p { max-width: 100%; }
-            .scroll-indicator { right: 10px; }
-        }
+            .content {
+                width: 100%;
+                flex-shrink: 0;
+            }
 
-        @media (max-width: 576px) {
-            .content h1 { font-size: 1.9rem; }
-            .content h2 { font-size: 1.65rem; }
+            .content h1 { font-size: 2rem; }
+            .content h2 { font-size: 1.8rem; }
+            .content p { max-width: 100%; }
             .stats { gap: 1.5rem; }
-            section { padding: 0 1.5rem; }
-            .slide-container { padding-left: 1.5rem; padding-right: 1.5rem; }
-            .section-visual { display: none; }
+
+            .section-visual--image {
+                position: static;
+                flex: 1;
+                min-height: 0;
+                height: auto;
+                width: 100%;
+                margin: 1rem 0 0;
+                padding: 0 1.5rem;
+                overflow: hidden;
+            }
+
+            .section-visual--image img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                object-position: top center;
+                filter: none;
+            }
         }
     </style>
 </head>
 <body>
     <nav>
-        <a href="#introduction" class="logo">加油 Jiayou!</a>
+        <a href="#introduction" class="logo">
+            <img src="Icon app.png" alt="Jiayou icon">
+            Jiayou
+        </a>
         <div class="nav-links">
             <a href="#introduction" class="nav-link">Home</a>
             <a href="#concept1" class="nav-link">Capture</a>
@@ -554,28 +619,12 @@
             <section id="introduction">
                 <div class="slide-container active">
                     <div class="content">
-                        <span class="section-tag">Language Learning</span>
-                        <h1>Master Languages Faster with Jiayou</h1>
-                        <p>An innovative app that transforms how you learn and practice languages through interactive challenges, social duels, and personalized tracking.</p>
-                        <div class="stats">
-                            <div class="stat-item">
-                                <span class="stat-number">500K+</span>
-                                <span class="stat-label">Active Learners</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-number">50+</span>
-                                <span class="stat-label">Languages</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-number">95%</span>
-                                <span class="stat-label">Satisfaction</span>
-                            </div>
-                        </div>
-                        <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Start Learning Now</a>
+                        <span class="section-tag">Introduction</span>
+                        <h1>Add oil on your chinese learning journey</h1>
+                        <p>A pocket size app that helps you learn Chinese on the go. Capture new words, quiz yourself, and track your progress effortlessly.</p>
                     </div>
-                    <div class="section-visual">
-                        <i class="fas fa-globe-americas"></i>
-                        <span class="visual-label">Global language learning community</span>
+                    <div class="section-visual section-visual--image">
+                        <img src="Frame 81.png" alt="Jiayou app screenshot">
                     </div>
                 </div>
                 <div class="scroll-down" onclick="scrollToNextSection()">
@@ -588,18 +637,10 @@
                     <div class="content">
                         <span class="section-tag">Feature 1</span>
                         <h2>Capture Words Instantly</h2>
-                        <p>Use your camera to capture any text in a foreign language. Jiayou instantly translates and saves new vocabulary to your personal word bank.</p>
-                        <ul class="feature-list">
-                            <li>Real-time translation with pronunciation</li>
-                            <li>Save words with context for better retention</li>
-                            <li>Create flashcards from captured content</li>
-                            <li>Organize vocabulary by categories</li>
-                        </ul>
-                        <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Try Capture Feature</a>
+                        <p>Build a personnal vocabulary list, or follow HSK levels and practice with tailored quizzes.</p>
                     </div>
-                    <div class="section-visual">
-                        <i class="fas fa-camera"></i>
-                        <span class="visual-label">Capture text in any language</span>
+                    <div class="section-visual section-visual--image">
+                        <img src="addwords.png" alt="Jiayou app screenshot">
                     </div>
                 </div>
                 <div class="scroll-down" onclick="scrollToNextSection()">
@@ -612,18 +653,10 @@
                     <div class="content">
                         <span class="section-tag">Feature 2</span>
                         <h2>Learn & Quiz Your Knowledge</h2>
-                        <p>Interactive lessons and quizzes adapted to your level and learning pace. Our AI identifies your weak spots and focuses on them.</p>
-                        <ul class="feature-list">
-                            <li>Personalized daily lessons</li>
-                            <li>Interactive quizzes with instant feedback</li>
-                            <li>Spaced repetition system</li>
-                            <li>Speaking and listening exercises</li>
-                        </ul>
-                        <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Try a Quiz</a>
+                        <p>Launch quizzes to test your knowledge and reinforce your learning. Learn pinyin and chinese characters anywhere.</p>
                     </div>
-                    <div class="section-visual">
-                        <i class="fas fa-brain"></i>
-                        <span class="visual-label">AI-powered adaptive learning</span>
+                    <div class="section-visual section-visual--image">
+                        <img src="Quiz feature.png" alt="Jiayou app screenshot">
                     </div>
                 </div>
                 <div class="scroll-down" onclick="scrollToNextSection()">
@@ -637,17 +670,9 @@
                         <span class="section-tag">Feature 3</span>
                         <h2>Track Performance & Engagement</h2>
                         <p>Comprehensive statistics show your progress, strengths, and areas for improvement. Stay motivated with achievements and milestones.</p>
-                        <ul class="feature-list">
-                            <li>Daily and weekly progress reports</li>
-                            <li>Time spent learning analytics</li>
-                            <li>Vocabulary growth tracking</li>
-                            <li>Skill level progression</li>
-                        </ul>
-                        <a href="https://app.jiayou.fr" class="cta-button" target="_blank">View Your Stats</a>
                     </div>
-                    <div class="section-visual">
-                        <i class="fas fa-chart-line"></i>
-                        <span class="visual-label">Detailed progress analytics</span>
+                    <div class="section-visual section-visual--image">
+                        <img src="Performance.png" alt="Jiayou app screenshot">
                     </div>
                 </div>
                 <div class="scroll-down" onclick="scrollToNextSection()">
@@ -661,17 +686,9 @@
                         <span class="section-tag">Feature 4</span>
                         <h2>Challenge Friends & Climb Leaderboards</h2>
                         <p>Compete with friends in language duels and climb to the top of global leaderboards. Learning is more fun with friendly competition!</p>
-                        <ul class="feature-list">
-                            <li>Challenge friends to vocabulary duels</li>
-                            <li>Global and friend leaderboards</li>
-                            <li>Weekly challenges with rewards</li>
-                            <li>Team competitions and events</li>
-                        </ul>
-                        <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Start a Duel</a>
                     </div>
-                    <div class="section-visual">
-                        <i class="fas fa-trophy"></i>
-                        <span class="visual-label">Compete and win with friends</span>
+                    <div class="section-visual section-visual--image">
+                        <img src="Duel.png" alt="Jiayou app screenshot">
                     </div>
                 </div>
             </section>
@@ -681,7 +698,7 @@
                     <div class="footer-section">
                         <h3>Jiayou</h3>
                         <p>Revolutionizing language learning through technology, community, and gamification.</p>
-                        <div class="app-badges">
+                       <!-- <div class="app-badges">
                             <div class="app-badge">
                                 <i class="fab fa-apple"></i>
                                 <span>App Store</span>
@@ -690,7 +707,7 @@
                                 <i class="fab fa-google-play"></i>
                                 <span>Google Play</span>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="footer-section">
                         <h3>Features</h3>
@@ -703,8 +720,8 @@
                     </div>
                     <div class="footer-section">
                         <h3>Contact</h3>
-                        <p><i class="fas fa-envelope" style="margin-right: 8px; color: #4a6cf7;"></i>contact@jiayou-app.com</p>
-                        <p><i class="fas fa-map-marker-alt" style="margin-right: 8px; color: #4a6cf7;"></i>San Francisco, CA</p>
+                        <p><i class="fas fa-envelope" style="margin-right: 8px; color: #4a6cf7;"></i>info@jiayou.fr</p>
+                        <p><i class="fas fa-map-marker-alt" style="margin-right: 8px; color: #4a6cf7;"></i>Paris, FR</p>
                     </div>
                     <div class="footer-section">
                         <h3>Access App</h3>
@@ -713,7 +730,7 @@
                     </div>
                 </div>
                 <div class="copyright">
-                    <p>&copy; 2024 Jiayou. All rights reserved.</p>
+                    <p>&copy; 2026 Jiayou. All rights reserved.</p>
                 </div>
             </footer>
         </main>
