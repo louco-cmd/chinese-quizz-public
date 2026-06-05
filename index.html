@@ -3,24 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jiayou - Learn Chinese Faster</title>
+    <title>Jiayou — Learn Chinese Vocabulary & Master HSK Levels</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Jiayou is a free Chinese learning app to build your vocabulary, master HSK levels, practice with flashcards and quizzes, and track your Mandarin progress. Learn Chinese on the go.">
+    <meta name="keywords" content="learn Chinese, Chinese vocabulary app, HSK levels, learn Mandarin, pinyin, Chinese characters, hanzi, flashcards, Chinese quiz, Chinese learning app">
+    <meta name="author" content="Jiayou">
+    <link rel="canonical" href="https://jiayou.fr">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="Icon app.png">
     <link rel="apple-touch-icon" href="Icon app.png">
 
     <!-- OG / Social -->
-    <meta property="og:title" content="Jiayou - Learn Chinese Faster">
-    <meta property="og:description" content="Master Chinese with Jiayou — capture words instantly, quiz yourself daily, track your progress, and challenge friends. The smarter way to learn.">
+    <meta property="og:title" content="Jiayou — Learn Chinese Vocabulary & Master HSK Levels">
+    <meta property="og:description" content="Build your Chinese vocabulary, practice with smart quizzes, and track your HSK progress. The smarter way to learn Mandarin Chinese.">
     <meta property="og:image" content="Icon app.png">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://jiayou.fr">
+    <meta property="og:locale" content="en_US">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Jiayou - Learn Chinese Faster">
-    <meta name="twitter:description" content="Master Chinese with Jiayou — capture words instantly, quiz yourself daily, track your progress, and challenge friends.">
+    <meta name="twitter:title" content="Jiayou — Learn Chinese Vocabulary & Master HSK Levels">
+    <meta name="twitter:description" content="Build your Chinese vocabulary, practice with smart quizzes, and track your HSK progress. The smarter way to learn Mandarin.">
     <meta name="twitter:image" content="Icon app.png">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Jiayou",
+      "applicationCategory": "EducationApplication",
+      "operatingSystem": "Web, iOS, Android",
+      "description": "Chinese vocabulary learning app with HSK levels, flashcards, pinyin practice, and progress tracking.",
+      "url": "https://jiayou.fr",
+      "inLanguage": "zh",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "featureList": [
+        "HSK vocabulary lists",
+        "Chinese flashcards with pinyin",
+        "Spaced repetition quizzes",
+        "Progress tracking",
+        "Vocabulary duels with friends"
+      ]
+    }
+    </script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -617,17 +650,16 @@
     <div class="main-container" id="main-container">
         <main>
             
-            <section id="introduction">
+            <section id="introduction" aria-label="Introduction">
                 <div class="slide-container active">
                     <div class="content">
-                        <span class="section-tag">Introduction</span>
-                        <h1>Add oil on your chinese learning journey</h1>
-                        <p>A pocket size app that helps you learn Chinese on the go. Capture new words, quiz yourself, and track your progress effortlessly.</p>
-                        <p>Available on desktop and mobile, jiayou is the best tool to enhance your chinese volabulary learning</p>
-
+                        <span class="section-tag">Free Chinese Learning App</span>
+                        <h1>The fastest way to build your Chinese vocabulary</h1>
+                        <p>Jiayou is a pocket-sized app for learning Mandarin Chinese. Build your personal word list, follow HSK levels, practice with smart flashcards, and track your progress — anywhere, anytime.</p>
+                        <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Start learning Chinese free</a>
                     </div>
                     <div class="section-visual section-visual--image">
-                        <img src="Frame 81.png" alt="Jiayou app screenshot">
+                        <img src="Frame 81.png" alt="Jiayou Chinese learning app — vocabulary dashboard showing HSK word lists and progress">
                     </div>
                 </div>
                 <div class="scroll-down" onclick="scrollToNextSection()">
@@ -635,15 +667,16 @@
                 </div>
             </section>
 
-            <section id="concept1">
+            <section id="concept1" aria-label="Build your vocabulary">
                 <div class="slide-container">
                     <div class="content">
-                        <span class="section-tag">Feature 1</span>
-                        <h2>Capture Words Instantly</h2>
-                        <p>Build a personnal vocabulary list, or follow HSK levels and practice with tailored quizzes.</p>
+                        <span class="section-tag">Vocabulary builder</span>
+                        <h2>Build your Chinese vocabulary list — HSK ready</h2>
+                        <p>Create your own word bank or follow structured HSK 1–6 vocabulary lists. Every word comes with pinyin, Chinese characters, and example sentences for deeper learning.</p>
+                        <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Build your vocabulary</a>
                     </div>
                     <div class="section-visual section-visual--image">
-                        <img src="addwords.png" alt="Jiayou app screenshot">
+                        <img src="addwords.png" alt="Jiayou app — adding Chinese words with pinyin and HSK level tags">
                     </div>
                 </div>
                 <div class="scroll-down" onclick="scrollToNextSection()">
@@ -651,15 +684,16 @@
                 </div>
             </section>
 
-            <section id="concept2">
+            <section id="concept2" aria-label="Quizzes and flashcards">
                 <div class="slide-container">
                     <div class="content">
-                        <span class="section-tag">Feature 2</span>
-                        <h2>Learn & Quiz Your Knowledge</h2>
-                        <p>Launch quizzes to test your knowledge and reinforce your learning. Learn pinyin and chinese characters anywhere.</p>
+                        <span class="section-tag">Flashcards & quizzes</span>
+                        <h2>Practice Chinese with smart flashcards and quizzes</h2>
+                        <p>Test your knowledge with adaptive quizzes that focus on your weak spots. Practice reading hanzi, writing pinyin, and recognizing tones — at your own pace.</p>
+                        <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Try a Chinese quiz</a>
                     </div>
                     <div class="section-visual section-visual--image">
-                        <img src="Quiz feature.png" alt="Jiayou app screenshot">
+                        <img src="Quiz feature.png" alt="Jiayou quiz interface — Chinese character flashcard with pinyin and multiple choice answers">
                     </div>
                 </div>
                 <div class="scroll-down" onclick="scrollToNextSection()">
@@ -667,15 +701,16 @@
                 </div>
             </section>
 
-            <section id="concept3">
+            <section id="concept3" aria-label="Track your Mandarin progress">
                 <div class="slide-container">
                     <div class="content">
-                        <span class="section-tag">Feature 3</span>
-                        <h2>Track Performance & Engagement</h2>
-                        <p>Comprehensive statistics show your progress, strengths, and areas for improvement. Stay motivated with achievements and milestones.</p>
+                        <span class="section-tag">Progress tracking</span>
+                        <h2>Track your Mandarin progress day by day</h2>
+                        <p>Detailed stats show how many words you've learned, your HSK level progression, and daily study streaks. Stay consistent and motivated with clear milestones.</p>
+                        <a href="https://app.jiayou.fr" class="cta-button" target="_blank">See your progress</a>
                     </div>
                     <div class="section-visual section-visual--image">
-                        <img src="Performance.png" alt="Jiayou app screenshot">
+                        <img src="Performance.png" alt="Jiayou performance dashboard — Chinese vocabulary progress charts and HSK level stats">
                     </div>
                 </div>
                 <div class="scroll-down" onclick="scrollToNextSection()">
@@ -683,15 +718,16 @@
                 </div>
             </section>
 
-            <section id="concept4">
+            <section id="concept4" aria-label="Challenge friends">
                 <div class="slide-container">
                     <div class="content">
-                        <span class="section-tag">Feature 4</span>
-                        <h2>Challenge Friends & Climb Leaderboards</h2>
-                        <p>Compete with friends in language duels and climb to the top of global leaderboards. Learning is more fun with friendly competition!</p>
+                        <span class="section-tag">Social learning</span>
+                        <h2>Challenge friends in Chinese vocabulary duels</h2>
+                        <p>Make learning Chinese more engaging by competing with friends. Test each other on hanzi, pinyin, and tone recognition — and climb the global leaderboard.</p>
+                        <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Start a duel</a>
                     </div>
                     <div class="section-visual section-visual--image">
-                        <img src="Duel.png" alt="Jiayou app screenshot">
+                        <img src="Duel.png" alt="Jiayou duel mode — two players competing on Chinese vocabulary in real time">
                     </div>
                 </div>
             </section>
@@ -700,25 +736,15 @@
                 <div class="footer-content">
                     <div class="footer-section">
                         <h3>Jiayou</h3>
-                        <p>Revolutionizing language learning through technology, community, and gamification.</p>
-                       <!-- <div class="app-badges">
-                            <div class="app-badge">
-                                <i class="fab fa-apple"></i>
-                                <span>App Store</span>
-                            </div>
-                            <div class="app-badge">
-                                <i class="fab fa-google-play"></i>
-                                <span>Google Play</span>
-                            </div>
-                        </div>-->
+                        <p>Free Chinese learning app to build vocabulary, master HSK levels, and practice Mandarin with flashcards and quizzes.</p>
                     </div>
                     <div class="footer-section">
-                        <h3>Features</h3>
+                        <h3>Learn Chinese</h3>
                         <div class="footer-links">
-                            <a href="#concept1">Word Capture</a>
-                            <a href="#concept2">Interactive Lessons</a>
-                            <a href="#concept3">Progress Tracking</a>
-                            <a href="#concept4">Social Challenges</a>
+                            <a href="#concept1">HSK Vocabulary Builder</a>
+                            <a href="#concept2">Chinese Flashcards & Quizzes</a>
+                            <a href="#concept3">Mandarin Progress Tracker</a>
+                            <a href="#concept4">Chinese Vocabulary Duels</a>
                         </div>
                     </div>
                     <div class="footer-section">
