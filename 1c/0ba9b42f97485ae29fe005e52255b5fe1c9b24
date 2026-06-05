@@ -1,0 +1,24 @@
+index.html
+  s_8ff8b25838cabc::t_4b0579d69722e3 671-672,674
+  s_8ff8b25838cabc::t_7dc101895c6120 751-752,754
+  s_8ff8b25838cabc::t_5f9aa4520399ae 58-67
+  s_8ff8b25838cabc::t_d5b8a2ff7ce11e 691-692,694
+  s_8ff8b25838cabc::t_1d3741e47baef1 711-712,714
+  s_8ff8b25838cabc::t_d6c467855a9e07 731-732,734
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.10-trip",
+  "base_commit_sha": "1c0ba9b42f97485ae29fe005e52255b5fe1c9b24",
+  "prompts": {},
+  "sessions": {
+    "s_8ff8b25838cabc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9ce0a879-9695-4209-a067-61f81fb7dd08",
+        "model": "global.anthropic.claude-sonnet-4-6"
+      },
+      "human_author": "Louis Cochet <locochet.08@gmail.com>"
+    }
+  }
+}
