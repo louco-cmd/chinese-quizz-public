@@ -55,7 +55,16 @@
     }
     </script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Preconnect for faster 3rd-party font loading -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <!-- Font Awesome deferred — non-render-blocking -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+    <!-- Preload LCP image -->
+    <link rel="preload" as="image" href="Frame 81.webp" type="image/webp">
+
     <style>
         * {
             margin: 0;
@@ -659,7 +668,10 @@
                         <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Start learning Chinese free</a>
                     </div>
                     <div class="section-visual section-visual--image">
-                        <img src="Frame 81.png" alt="Jiayou Chinese learning app — vocabulary dashboard showing HSK word lists and progress">
+                        <picture>
+                            <source srcset="Frame 81.webp" type="image/webp">
+                            <img src="Frame 81.webp" alt="Jiayou Chinese learning app — vocabulary dashboard showing HSK word lists and progress" fetchpriority="high" width="1120" height="1627">
+                        </picture>
                     </div>
                 </div>
                 <div class="scroll-down" onclick="scrollToNextSection()">
@@ -676,7 +688,10 @@
                         <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Build your vocabulary</a>
                     </div>
                     <div class="section-visual section-visual--image">
-                        <img src="addwords.png" alt="Jiayou app — adding Chinese words with pinyin and HSK level tags">
+                        <picture>
+                            <source srcset="addwords.webp" type="image/webp">
+                            <img src="addwords.webp" alt="Jiayou app — adding Chinese words with pinyin and HSK level tags" loading="lazy" width="1120" height="1679">
+                        </picture>
                     </div>
                 </div>
                 <div class="scroll-down" onclick="scrollToNextSection()">
@@ -693,7 +708,10 @@
                         <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Try a Chinese quiz</a>
                     </div>
                     <div class="section-visual section-visual--image">
-                        <img src="Quiz feature.png" alt="Jiayou quiz interface — Chinese character flashcard with pinyin and multiple choice answers">
+                        <picture>
+                            <source srcset="Quiz feature.webp" type="image/webp">
+                            <img src="Quiz feature.webp" alt="Jiayou quiz interface — Chinese character flashcard with pinyin and multiple choice answers" loading="lazy" width="1120" height="1660">
+                        </picture>
                     </div>
                 </div>
                 <div class="scroll-down" onclick="scrollToNextSection()">
@@ -710,7 +728,10 @@
                         <a href="https://app.jiayou.fr" class="cta-button" target="_blank">See your progress</a>
                     </div>
                     <div class="section-visual section-visual--image">
-                        <img src="Performance.png" alt="Jiayou performance dashboard — Chinese vocabulary progress charts and HSK level stats">
+                        <picture>
+                            <source srcset="Performance.webp" type="image/webp">
+                            <img src="Performance.webp" alt="Jiayou performance dashboard — Chinese vocabulary progress charts and HSK level stats" loading="lazy" width="1120" height="1749">
+                        </picture>
                     </div>
                 </div>
                 <div class="scroll-down" onclick="scrollToNextSection()">
@@ -727,7 +748,10 @@
                         <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Start a duel</a>
                     </div>
                     <div class="section-visual section-visual--image">
-                        <img src="Duel.png" alt="Jiayou duel mode — two players competing on Chinese vocabulary in real time">
+                        <picture>
+                            <source srcset="Duel.webp" type="image/webp">
+                            <img src="Duel.webp" alt="Jiayou duel mode — two players competing on Chinese vocabulary in real time" loading="lazy" width="1120" height="1665">
+                        </picture>
                     </div>
                 </div>
             </section>
