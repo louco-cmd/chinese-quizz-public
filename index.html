@@ -573,7 +573,8 @@
             #concept1,
             #concept2,
             #concept3,
-            #concept4 {
+            #concept4,
+            #pricing {
                 overflow: hidden;
             }
 
@@ -614,6 +615,16 @@
                 object-position: top center;
                 filter: none;
             }
+
+            /* Pricing cards stack on mobile */
+            #pricing .slide-container {
+                justify-content: flex-start;
+                overflow-y: auto;
+            }
+            #pricing [style*="grid-template-columns: 1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+                max-width: 100% !important;
+            }
         }
     </style>
 </head>
@@ -629,6 +640,7 @@
             <a href="#concept2" class="nav-link">Learn</a>
             <a href="#concept3" class="nav-link">Track</a>
             <a href="#concept4" class="nav-link">Challenge</a>
+            <a href="#pricing" class="nav-link" style="color: #186FF6; font-weight: 700;">Pricing</a>
         </div>
         <div class="nav-right">
             <a href="https://app.jiayou.fr" class="cta-button" target="_blank">Connect / Register</a>
@@ -646,6 +658,7 @@
         <a href="#concept2">Learn</a>
         <a href="#concept3">Track</a>
         <a href="#concept4">Challenge</a>
+        <a href="#pricing" style="color: #186FF6; font-weight: 700;">Pricing</a>
     </div>
 
     <div class="scroll-indicator">
@@ -654,6 +667,7 @@
         <div class="indicator-dot" data-section="concept2" data-label="Learn"></div>
         <div class="indicator-dot" data-section="concept3" data-label="Track"></div>
         <div class="indicator-dot" data-section="concept4" data-label="Challenge"></div>
+        <div class="indicator-dot" data-section="pricing" data-label="Pricing"></div>
     </div>
 
     <div class="main-container" id="main-container">
@@ -752,6 +766,72 @@
                             <source srcset="Duel.webp" type="image/webp">
                             <img src="Duel.webp" alt="Jiayou duel mode — two players competing on Chinese vocabulary in real time" loading="lazy" width="1120" height="1665">
                         </picture>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ── PRICING ── -->
+            <section id="pricing" aria-label="Pricing" style="background: #f8f9fa;">
+                <div class="slide-container">
+                    <div class="content" style="width: 100%; max-width: 860px; margin: 0 auto; padding: 0;">
+
+                        <div style="text-align: center; margin-bottom: 36px;">
+                            <span class="section-tag">Simple pricing</span>
+                            <h2 style="font-size: 2.2rem; margin-bottom: 10px;">Start free. Go Premium when you're ready.</h2>
+                            <p style="color: #888; font-size: 0.97rem; max-width: 460px; margin: 0 auto;">No hidden fees. Cancel anytime. Your subscription syncs to the app instantly.</p>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 760px; margin: 0 auto;">
+
+                            <!-- FREE -->
+                            <div style="background: white; border: 2px solid #e8ecf0; border-radius: 20px; padding: 28px; display: flex; flex-direction: column;">
+                                <div style="margin-bottom: 20px;">
+                                    <div style="font-weight: 800; font-size: 1.1rem; color: #1a1a2e; margin-bottom: 4px;">Free</div>
+                                    <div style="font-size: 2.4rem; font-weight: 800; color: #1a1a2e; line-height: 1;">0€</div>
+                                    <div style="color: #999; font-size: 0.85rem; margin-top: 4px;">forever</div>
+                                </div>
+                                <ul style="list-style: none; padding: 0; margin: 0 0 24px; flex: 1;">
+                                    <li style="padding: 7px 0; border-bottom: 1px solid #f3f3f3; font-size: 0.9rem; color: #555; display: flex; gap: 8px;"><span style="color: #f59e0b;">◐</span> 350 words max</li>
+                                    <li style="padding: 7px 0; border-bottom: 1px solid #f3f3f3; font-size: 0.9rem; color: #555; display: flex; gap: 8px;"><span style="color: #f59e0b;">◐</span> 2 quizzes / day</li>
+                                    <li style="padding: 7px 0; border-bottom: 1px solid #f3f3f3; font-size: 0.9rem; color: #555; display: flex; gap: 8px;"><span style="color: #f59e0b;">◐</span> 1 duel / day</li>
+                                    <li style="padding: 7px 0; font-size: 0.9rem; color: #555; display: flex; gap: 8px;"><span style="color: #198754;">✓</span> HSK 1 vocabulary</li>
+                                </ul>
+                                <a href="https://app.jiayou.fr" target="_blank" style="display: block; text-align: center; padding: 12px; border-radius: 12px; border: 2px solid #e0e0e0; background: white; color: #888; font-weight: 700; text-decoration: none; font-size: 0.92rem;">Get started free</a>
+                            </div>
+
+                            <!-- PREMIUM -->
+                            <div style="background: linear-gradient(145deg, #0d6efd, #6610f2); border-radius: 20px; padding: 28px; display: flex; flex-direction: column; position: relative; box-shadow: 0 12px 32px rgba(13,110,253,0.28);">
+                                <div style="position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.35); border-radius: 20px; padding: 3px 12px; font-size: 0.72rem; font-weight: 700; color: white; letter-spacing: 0.5px;">POPULAR</div>
+                                <div style="margin-bottom: 20px;">
+                                    <div style="font-weight: 800; font-size: 1.1rem; color: white; margin-bottom: 4px;">Premium</div>
+                                    <div style="font-size: 2.4rem; font-weight: 800; color: white; line-height: 1;">5€</div>
+                                    <div style="color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-top: 4px;">per month</div>
+                                </div>
+                                <ul style="list-style: none; padding: 0; margin: 0 0 24px; flex: 1;">
+                                    <li style="padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.15); font-size: 0.9rem; color: white; display: flex; gap: 8px;"><span style="color: #a5f3fc;">∞</span> Unlimited words</li>
+                                    <li style="padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.15); font-size: 0.9rem; color: white; display: flex; gap: 8px;"><span style="color: #a5f3fc;">∞</span> Unlimited quizzes</li>
+                                    <li style="padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.15); font-size: 0.9rem; color: white; display: flex; gap: 8px;"><span style="color: #a5f3fc;">∞</span> Unlimited duels</li>
+                                    <li style="padding: 7px 0; font-size: 0.9rem; color: white; display: flex; gap: 8px;"><span style="color: #a5f3fc;">✓</span> All HSK packs (1–6)</li>
+                                </ul>
+                                <a href="https://app.jiayou.fr/subscribe?plan=premium" target="_blank"
+                                   style="display: block; text-align: center; padding: 13px; border-radius: 12px; background: white; color: #0d6efd; font-weight: 800; text-decoration: none; font-size: 0.95rem; transition: all 0.2s;">
+                                    Start Premium — 5€/mo
+                                </a>
+                                <p style="text-align: center; color: rgba(255,255,255,0.6); font-size: 0.73rem; margin-top: 10px; margin-bottom: 0;">
+                                    Secure payment · Cancel anytime
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <!-- Trust items -->
+                        <div style="display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; margin-top: 28px; color: #999; font-size: 0.8rem;">
+                            <span>🔒 Secure checkout</span>
+                            <span>🔄 Cancel anytime</span>
+                            <span>⚡ Instant activation</span>
+                            <span>📱 Works on all devices</span>
+                        </div>
+
                     </div>
                 </div>
             </section>
